@@ -9,15 +9,19 @@ import Layout from "../pages/layout/Layout";
 
 
 export const router = createBrowserRouter([
-  {
-    path: "/login",
-    element: <Login />,
-  },
+  // {
+  //   path: "/login",
+  //   element: <Login />,
+  // },
   {
     path: "/signup",
     element: <Signup />,
   },
-  
+  {
+    path:"/",
+    element:<Layout/>,
+    children:[
+      
   {
     path: "/home",
     element:<Home />,
@@ -27,6 +31,12 @@ export const router = createBrowserRouter([
     path:"/about",
     element:<About/>
   },
+  {
+    path: "/login",
+    element: <Login />,
+  },
 
+    ]
+  }
 
 ])
