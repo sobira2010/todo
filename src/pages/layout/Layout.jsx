@@ -10,7 +10,6 @@ function Layout() {
         <nav>
           <Link to="/home">Home</Link>
           <Link to="/about">About</Link>
-          <Link to="/login">Login</Link>
         </nav>
       </header>
 
