@@ -1,31 +1,43 @@
 import { useState } from "react";
 import "./login.css";
+import Toast from "../../components/Toast";
 import { login } from "../service/authService";
+import { useNavigate } from "react-router";
 
 function Login() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [toast, setToast] = useState({ message: "", type: "info" });
+
+  const navigate = useNavigate();
 
   const handleLogin = async (e) => {
-  e.preventDefault();
-  
+    e.preventDefault();
 
-  const payload = {
-    username: email,
-    password: password,
+    const payload = {
+      username: email,
+      password: password,
+    };
+
+    try {
+      const response = await login(payload);
+      const responseData = response?.data;
+
+      if (responseData?.success === false) {
+        setToast({ message: responseData.message || "Login failed", type: "error" });
+        return;
+      }
+
+      localStorage.setItem("Token", responseData?.token || "");
+      setToast({ message: responseData?.message || "Login successful", type: "success" });
+      navigate("/home");
+    } catch (error) {
+      const message = error?.response?.data?.message || error?.response?.data?.detail || "Invalid credentials";
+      setToast({ message, type: "error" });
+    }
   };
 
-  try {
-    const response = await login(payload);
-    console.log(response.data);
-    localStorage.setItem('Token', response.data.token)
-  } catch (error) {
-    console.log(error);
-  }
-};
- 
   return (
-
     <div className="login-container">
       <div className="login-card">
         <h2>Login</h2>
@@ -59,9 +71,13 @@ function Login() {
             Login
           </button>
         </form>
-
-        
       </div>
+
+      <Toast
+        message={toast.message}
+        type={toast.type}
+        onClose={() => setToast({ message: "", type: "info" })}
+      />
     </div>
   );
 }

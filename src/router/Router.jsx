@@ -5,6 +5,7 @@ import Signup from "../pages/signup/Signup";
 import Home from "../pages/home/Home";
 import About from "../pages/about/About";
 import Layout from "../pages/layout/Layout";
+import CompanyProfile from "../pages/companyprofile/CompanyProfile";
 
 
 
@@ -17,6 +18,12 @@ export const router = createBrowserRouter([
     path: "/signup",
     element: <Signup />,
   },
+   
+  {
+    path: "/Company-Profile",
+    element: <CompanyProfile />,
+  },
+
   {
     path:"/",
     element:<Layout/>,

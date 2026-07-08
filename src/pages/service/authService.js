@@ -13,3 +13,10 @@ export const login=async(payload)=>{
     return response;
 }
 
+export const createCompanyProfile=async(payload)=>{
+    const response=await api.post('company-profile/',payload)
+    return response;
+   
+}
+
+
