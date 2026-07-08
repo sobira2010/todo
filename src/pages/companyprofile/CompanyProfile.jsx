@@ -1,5 +1,5 @@
 import { useState } from "react";
-import "./companyProfile.css";
+import "./Companyprofile.css";
 import Toast from "../../components/Toast";
 import { createCompanyProfile } from "../service/authService";
 import { useNavigate } from "react-router";
